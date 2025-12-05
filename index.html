@@ -288,13 +288,10 @@ Bản thân tui cũng từng nhiều lần bị loại, mỗi lần như thế t
     function login() {
       const user = document.getElementById('user').value;
       const pass = document.getElementById('pass').value;
-      const error = document.getElementById('error');
 
-      if(user === "Nguyễn Như Sương An" && pass === "van") {
+      if(user && pass) {
         document.getElementById('login-screen').style.display = 'none';
         document.getElementById('envelope-screen').style.display = 'flex';
-      } else {
-        error.textContent = "Incorrect username or password";
       }
     }
 
@@ -320,7 +317,4 @@ Bản thân tui cũng từng nhiều lần bị loại, mỗi lần như thế t
   </script>
 
 </body>
-
 </html>
-
-
