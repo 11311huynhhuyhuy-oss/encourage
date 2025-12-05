@@ -286,13 +286,8 @@ Bản thân tui cũng từng nhiều lần bị loại, mỗi lần như thế t
 
   <script>
     function login() {
-      const user = document.getElementById('user').value;
-      const pass = document.getElementById('pass').value;
-
-      if(user && pass) {
-        document.getElementById('login-screen').style.display = 'none';
-        document.getElementById('envelope-screen').style.display = 'flex';
-      }
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('envelope-screen').style.display = 'flex';
     }
 
     function openEnvelope() {
