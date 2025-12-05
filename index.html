@@ -1,0 +1,323 @@
+<!-- Updated version with sticky note + red pin integrated -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Encouragement Page</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital@0;1&family=Lora:wght@400;600;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Crimson Text', serif;
+      background: linear-gradient(135deg, rgba(20, 15, 10, 0.7), rgba(40, 25, 15, 0.7), rgba(50, 30, 15, 0.7)), url('1f5981ed868f0cf7f1e8625b43490455.jpg') center/cover no-repeat fixed;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #e8d7c3;
+    }
+
+    /* LOGIN */
+    .login-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    .login-box {
+      width: 330px;
+      padding: 40px;
+      background: rgba(35, 30, 25, 0.95);
+      border: 3px solid #6b4423;
+      backdrop-filter: blur(5px);
+      border-radius: 2px;
+      text-align: center;
+      animation: fadeIn 1s ease;
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5), 0 8px 16px rgba(0, 0, 0, 0.7);
+    }
+
+    .login-box h2 {
+      font-family: 'Lora', serif;
+      font-size: 32px;
+      color: #d4a574;
+      margin: 0 0 10px 0;
+      font-weight: 700;
+    }
+
+    .login-box p {
+      color: #a89968;
+      font-size: 14px;
+      font-style: italic;
+    }
+
+    .input {
+      width: 80%;
+      padding: 12px;
+      margin-top: 12px;
+      border-radius: 0;
+      border: 2px solid #6b4423;
+      outline: none;
+      background: rgba(25, 20, 15, 0.9);
+      font-family: 'Crimson Text', serif;
+      font-size: 16px;
+      color: #d4a574;
+    }
+
+    .input::placeholder {
+      color: #7a6b5d;
+    }
+
+    .login-btn {
+      margin-top: 20px;
+      padding: 12px 25px;
+      border-radius: 0;
+      border: 2px solid #6b4423;
+      background: linear-gradient(135deg, #6b4423, #4a2c1a);
+      color: #d4a574;
+      font-size: 16px;
+      cursor: pointer;
+      font-family: 'Crimson Text', serif;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .login-btn:hover {
+      background: linear-gradient(135deg, #8b5a2b, #6b4423);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), 0 0 15px rgba(212, 165, 116, 0.3);
+    }
+
+    .error {
+      color: #d4a574;
+      margin-top: 10px;
+      min-height: 20px;
+      font-size: 14px;
+    }
+
+    /* Envelope */
+    #envelope-screen {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    .envelope-container { cursor: pointer; transition: transform 0.5s ease; }
+    .envelope-container:hover { transform: scale(1.05); }
+    .envelope { width: 320px; height: 200px; background: #2a2420; position: relative; border-radius: 0; overflow: hidden; box-shadow: 0 8px 16px rgba(0,0,0,0.7), inset 0 0 15px rgba(0,0,0,0.5); border: 2px solid #6b4423; }
+    .flap { width: 0; height: 0; border-left: 160px solid transparent; border-right: 160px solid transparent; border-bottom: 120px solid #5a3a2a; position: absolute; top: 0; transition: transform 0.6s ease; transform-origin: top; }
+    .letter-preview { position: absolute; bottom: 0; width: 100%; height: 80px; background: #2a2420; display: flex; justify-content: center; align-items: center; font-size: 16px; color: #d4a574; font-weight: 500; font-family: 'Crimson Text', serif; }
+    .open .flap { transform: rotateX(180deg); }    @keyframes fadeIn { from {opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);} }
+
+    /* Sticky Note Letter */
+    #note-screen {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    .note-container {
+      position: relative;
+      width: 340px;
+      padding: 30px;
+      background: linear-gradient(135deg, #3d3530, #4a3f38);
+      border-radius: 0;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6), inset 0 0 10px rgba(212, 165, 116, 0.1);
+      transform: rotate(-2deg);
+      animation: fadeIn 0.7s ease;
+      color: #d4a574;
+      border: 2px solid #6b4423;
+    }
+
+    .pin {
+      width: 22px;
+      height: 22px;
+      background: #8b5a2b;
+      border-radius: 50%;
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+      border: 3px solid #6b4423;
+    }
+
+    .note-text {
+      margin-top: 18px;
+      font-size: 17px;
+      line-height: 1.8;
+      white-space: pre-line;
+      font-family: 'Crimson Text', serif;
+      color: #d4a574;
+    }
+
+    .proceed-btn {
+      margin-top: 25px;
+      padding: 12px 30px;
+      background: linear-gradient(135deg, #6b4423, #4a2c1a);
+      color: #d4a574;
+      border: 2px solid #6b4423;
+      border-radius: 0;
+      font-size: 16px;
+      font-weight: 600;
+      font-family: 'Crimson Text', serif;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .proceed-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5), 0 0 15px rgba(212, 165, 116, 0.3);
+      background: linear-gradient(135deg, #8b5a2b, #6b4423);
+    }
+
+    .proceed-btn:active {
+      transform: scale(0.98);
+    }
+
+    /* Next Content Screen */
+    #next-screen {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    .next-container {
+      text-align: center;
+      animation: fadeIn 0.8s ease;
+    }
+
+    .next-container h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .next-container p {
+      font-size: 18px;
+      margin-bottom: 40px;
+    }
+
+    /* Final Content Screen */
+    #final-screen {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100vw;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN SCREEN -->
+  <div id="login-screen" class="login-container">
+    <div class="login-box">
+      <h2>Chaò mừng Nguyễn Như Sương An</h2>
+      <p>Nhập tên đăng nhập và mật khẩu ở dưới nhe</p>
+      <input id="user" class="input" type="text" placeholder="Username" />
+      <input id="pass" class="input" type="password" placeholder="Password" />
+      <button class="login-btn" onclick="login()">Login</button>
+      <div id="error" class="error"></div>
+    </div>
+  </div>
+
+  <!-- ENVELOPE SCREEN -->
+  <div id="envelope-screen">
+    <div class="envelope-container" onclick="openEnvelope()">
+      <div class="envelope">
+        <div class="flap"></div>
+        <div class="letter-preview">Click to open</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STICKY NOTE LETTER SCREEN -->
+  <div id="note-screen">
+    <div class="note-container">
+      <div class="pin"></div>
+      <div class="note-text">
+Gửi Sương An!
+Như bà đã nói rằng là bà không muốn nhận quá nhiều sự động viên, cổ vũ trước những dịp quan trọng như thế này và bản thân San là một người tự lập. Tui hiểu rất rõ điều đó. Tuy nhiên, sự lo lắng của bà cũng phần nào làm tui cũng thấp thỏm theo. Chính vì vậy tui vẫn muốn nói một vài lời động viên bà trước khi bà bước vào một bài thi quan trọng đối với bà.
+Từ lúc hè đến giờ bà đã trải qua một quãng thời gian có thể nói là dài, không ngừng chăm chỉ học và luyện tập và cho đến khi mọi sự cố gắng đều được đền đáp khi bà đậu vòng 1. Khi nhận được tin đó thì bà đã rất vui và tui cũng vui lây.
+
+
+      </div>
+      <button class="proceed-btn" onclick="proceedToNext()">Proceed</button>
+    </div>
+  </div>
+
+  <!-- NEXT CONTENT SCREEN -->
+  <div id="next-screen">
+    <div class="note-container">
+      <div class="pin"></div>
+      <div class="note-text">
+
+
+Bà đã vượt qua vòng 1 rồi, nghĩa là bà thực sự có năng lực. Vậy nên đừng ngần ngại mà bước tiếp – cứ dũng cảm mà chiến hết mình. Bà có đủ sự chăm chỉ, khả năng và bản lĩnh để đi xa hơn bất kỳ ai nghĩ. Tui tin bà sẽ làm thật tốt ở vòng này, thậm chí còn tốt hơn cả chính bà mong đợi nữa
+Tui hiểu tâm lý lo sợ của bà, và cũng sẽ khá là vô lý nếu bắt một người trước một kỳ thi quan trọng mà phải tỏ ra vui vẻ hoàn toàn. Cho nên tui nói ra những dòng này chỉ mong sẽ giúp cho bà một phần nào đó cảm thấy nhẹ lòng và vững tinh thần hơn
+
+      </div>
+      <button class="proceed-btn" onclick="proceedToFinal()">Proceed</button>
+    </div>
+  </div>
+
+  <!-- ANOTHER CONTENT SCREEN -->
+  <div id="final-screen">
+    <div class="note-container">
+      <div class="pin"></div>
+      <div class="note-text">
+        Cho tui đá qua chia sẻ câu chuyện của tui một chút nhe
+Bản thân tui cũng từng nhiều lần bị loại, mỗi lần như thế tui đều buồn và từ đó đến giờ tui chẳng dám “mạo hiểm” chen chân để dành vị trí trong đội tuyển và tui cũng đã rất tiếc nuối khi đã ra quyết định không thử sức nữa. Tui cũng xin thú thực là khi bà được vào đội tuyển, tui đã rất vui nhưng cũng xen lẫn một chút tiếc nuối và thất vọng  cho bản thân vì tui đã luôn nghĩ đến viễn cảnh tui với bà đều được vào đội tuyển thì sẽ hay đến chừng nào nhưng nó lại không xảy ra. Tuy hơi tiếc nhưng tui vẫn rất vui cho bà.					 
+	    Dù gì thì cố lên nha San!
+        Cảm ơn bà đã đọc những dòng này của tui. 
+        Wish you the best of luck!
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function login() {
+      const user = document.getElementById('user').value;
+      const pass = document.getElementById('pass').value;
+      const error = document.getElementById('error');
+
+      if(user === "friend" && pass === "love") {
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('envelope-screen').style.display = 'flex';
+      } else {
+        error.textContent = "Incorrect username or password";
+      }
+    }
+
+    function openEnvelope() {
+      const envelope = document.querySelector('.envelope');
+      envelope.classList.add('open');
+
+      setTimeout(() => {
+        document.getElementById('envelope-screen').style.display = 'none';
+        document.getElementById('note-screen').style.display = 'flex';
+      }, 700);
+    }
+
+    function proceedToNext() {
+      document.getElementById('note-screen').style.display = 'none';
+      document.getElementById('next-screen').style.display = 'flex';
+    }
+
+    function proceedToFinal() {
+      document.getElementById('next-screen').style.display = 'none';
+      document.getElementById('final-screen').style.display = 'flex';
+    }
+  </script>
+
+</body>
+</html>
